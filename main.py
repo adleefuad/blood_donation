@@ -1,6 +1,9 @@
 import scheduler
 import import_export
 import Plotting
+import warnings
+
+warnings.ignore('ignore')
 
 #import data
 facility_df,gran_df = import_export.import_data()

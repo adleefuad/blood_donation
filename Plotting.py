@@ -162,3 +162,4 @@ def plot_average(facility_df):
     print('Plotting and Save AverageTime Series Successful!')
 def save_all(facility_df,gran_df):
     plot_choropleth(facility_df)
+    plot_average(facility_df)
