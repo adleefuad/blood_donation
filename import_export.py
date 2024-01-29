@@ -5,7 +5,7 @@ import shutil
 import git
 import pyarrow.parquet as pq
 import pandas as pd
-
+from config import bot_telegram_token, group_chat_id
 def on_rm_error(func, path, exc_info):
     """
     Error handler for shutil.rmtree.
@@ -54,3 +54,22 @@ def import_data():
 
     return (facility_df, gran_df)
     
+def send_telegram_message(text):
+    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
+    payload = {
+        'chat_id': chat_id,
+        'text': text
+    }
+    response = requests.post(url, json=payload)
+    return response.json()
+
+def send_telegram_image(chat_id, img_path, bot_token):
+    url = f'https://api.telegram.org/bot{bot_token}/sendPhoto'
+    payload = {
+        'chat_id': chat_id
+    }
+    files = {
+        'photo': open(img_path, 'rb')
+    }
+    response = requests.post(url, data=payload, files=files)
+    return response.json()
