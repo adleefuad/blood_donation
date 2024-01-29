@@ -55,18 +55,18 @@ def import_data():
     return (facility_df, gran_df)
     
 def send_telegram_message(text):
-    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
+    url = f'https://api.telegram.org/bot{bot_telegram_token}/sendMessage'
     payload = {
-        'chat_id': chat_id,
+        'chat_id': group_chat_id,
         'text': text
     }
     response = requests.post(url, json=payload)
     return response.json()
 
-def send_telegram_image(chat_id, img_path, bot_token):
-    url = f'https://api.telegram.org/bot{bot_token}/sendPhoto'
+def send_telegram_image(img_path):
+    url = f'https://api.telegram.org/bot{bot_telegram_token}/sendPhoto'
     payload = {
-        'chat_id': chat_id
+        'chat_id': group_chat_id
     }
     files = {
         'photo': open(img_path, 'rb')
