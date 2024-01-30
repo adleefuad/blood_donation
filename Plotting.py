@@ -111,8 +111,8 @@ def plot_average(facility_df):
     plt.figure(figsize=(18, 14))
 
     # Time Series Plot for each blood type with data labels
-    for blood_type, color in zip(['blood_a', 'blood_b', 'blood_ab', 'blood_o'], ['blue', 'green', 'red', 'purple']):
-        plt.plot(last_15_months_avg_daily.index, last_15_months_avg_daily[blood_type], label=f'Blood Type {blood_type[-1]} - Time Series', color=color, alpha=0.7)
+    for blood_type, color,blood_label in zip(['blood_a', 'blood_b', 'blood_ab', 'blood_o'], ['blue', 'green', 'red', 'purple'],['blood a', 'blood b', 'blood ab', 'blood o']):
+        plt.plot(last_15_months_avg_daily.index, last_15_months_avg_daily[blood_type], label=blood_label, color=color, alpha=0.7)
         for x, y in zip(last_15_months_avg_daily.index, last_15_months_avg_daily[blood_type]):
             plt.text(x, y, f'{y:.1f}', color='black', fontsize=10)
 
@@ -141,11 +141,11 @@ def gran_data_process(gran_df):
     gran_df['donor_age'] = gran_df['visit_date'].dt.year-gran_df['birth_date'] #getting the age of donor at the date of donation
     gran_fil = gran_df[gran_df['donor_age']<=65] #Filter only take age 65 or less
     return gran_fil
-
 def gran_data_process2(gran_df):
     gran_fil = gran_data_process(gran_df)
     donor_donations = gran_fil.groupby('donor_id').size().reset_index(name='donation_count')
     return donor_donations
+
 def plot_doughnut(gran_df):
     donor_donations = gran_data_process2(gran_df)
     #binning the donation count
@@ -231,7 +231,7 @@ def plot_latest(gran_df):
     grouped_data.plot(kind='barh', stacked=True, figsize=(14, 8),cmap='YlGn')
 
     # Adding titles and labels
-    plt.title('Latest Date Donation Frequency by Age & Donor Group', fontsize=15)
+    plt.title(f'{latest_date.strftime("%d-%m-%Y")} Donation Frequency by Age & Donor Group', fontsize=15)
     plt.xlabel('Number of Donors', fontsize=15)
     plt.ylabel('Donation Count Group', fontsize=15)
     plt.legend(title='Age Group', bbox_to_anchor=(1.05, 1), loc='upper left')
