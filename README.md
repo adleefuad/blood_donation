@@ -10,7 +10,7 @@ To use the service:
 2. Change your anaconda directory in run.bat file
 3. Create environment using the requirements.txt
 ```bash
-  conda create --name <env_name> --file requirements.txt
+  conda create --name datapipe --file requirements.txt
 ```
 4. To start the service click run.bat
 
