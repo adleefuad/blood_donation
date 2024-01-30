@@ -13,9 +13,7 @@ To use the service:
   conda create --name <env_name> --file requirements.txt
 ```
 4. To start the service click run.bat
-```bash
-  
-```
+
 I have compiled my EDA regarding the data (EDA.pynb) and my thought process while exploring and deciding what visualisation to use
 
 
